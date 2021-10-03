@@ -1,0 +1,20 @@
+{
+  "name": "techblog",
+  "version": "1.0.0",
+  "description": "A website for writing about and discussing topics in the field of Tech with other developers and enthusiasts.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElijahRomer/TechBlog.git"
+  },
+  "author": "Elijah Romer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ElijahRomer/TechBlog/issues"
+  },
+  "homepage": "https://github.com/ElijahRomer/TechBlog#readme"
+}
