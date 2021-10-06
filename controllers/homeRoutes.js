@@ -1,6 +1,8 @@
 const router = require(`express`).Router();
 const withAuth = require(`../utils/auth`);
 
-// ROUTES HERE
+router.get(`/`, (req, res) => {
+  res.render(`landingPage`);
+})
 
 module.exports = router;
