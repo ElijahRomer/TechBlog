@@ -10,6 +10,7 @@ const logger = require("morgan");
 
 // Database connection
 const sequelize = require(`./config/connection`);
+// allows express-session to store session values in the database session temporary table
 const SequelizeStore = require(`connect-session-sequelize`)(session.Store);
 
 // Options object to pass to the middleware in the app.use(session()) call.
@@ -19,13 +20,18 @@ const sess = {
   secret: process.env.SESSION_SECRET,
 
   // Settings object for the session ID cookie. The default value is { path: '/', httpOnly: true, secure: false, maxAge: null }.
-  cookie: {},
+  cookie: {
+    maxAge: 900000, //Session will expire after 15 minutes of inactivity.
+  },
 
   // Forces the session to be saved back to the session store, even if the session was never modified during the request.
-  resave: false,
+  resave: true,
 
   // Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified. 
   saveUninitialized: true,
+
+  // Resets the expiration date to "maxAge" value on every response. Allows the session to continue past maxAge from session initialization as long as the user continues to interact with the website while the session is valid.
+  rolling: true,
 
   // The session store instance, defaults to a new MemoryStore instance, but we are manually setting it to the express-session-sequelize so that it will save session data in a temporary SQL Table.
   store: new SequelizeStore({
