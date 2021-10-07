@@ -31,9 +31,7 @@ Comment.init(
     comment_body: {
       type: DataTypes.TEXT,
       allowNull: false,
-      validate: {
-        isEmail: true,
-      },
+      length: "long"
     },
     // timestamps included to cover created at and updated at requirements
   },

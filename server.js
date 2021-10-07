@@ -5,6 +5,8 @@ const app = express();
 const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 3001;
 const routes = require(`./controllers`);
+const logger = require("morgan");
+
 
 // Database connection
 const sequelize = require(`./config/connection`);
@@ -47,6 +49,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Tell Express to parse incoming JSON data and URL-encoded data in a way that can be accessed in the routes via req.body.
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Log all incoming requests to the server.
+app.use(logger("dev"));
 
 // Tell Express to use the router setup in the controllers folder
 app.use(routes);

@@ -4,7 +4,6 @@
   "description": "A website for writing about and discussing topics in the field of Tech with other developers and enthusiasts.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
@@ -24,6 +23,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
     "express-session": "^1.17.2",
+    "morgan": "^1.10.0",
     "mysql2": "^2.3.0",
     "path": "^0.12.7",
     "sequelize": "^6.6.5"
