@@ -36,7 +36,7 @@ router.post(`/login`, async (req, res) => {
   }
 })
 
-router.get(`/logout`, (req, res) => {
+router.get(`/logout`, withAuth, (req, res) => {
   try {
     req.session.destroy(() => {
       res.redirect(`../`);

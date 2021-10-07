@@ -9,7 +9,7 @@ const handleFormSubmit = async (e) => {
 
   console.log(loginData)
 
-  const response = await fetch(`/api/login`, {
+  const response = await fetch(`/api/user/login`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
