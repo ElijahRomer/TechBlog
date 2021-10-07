@@ -1,18 +1,21 @@
 body {
   font-size: large;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 nav {
   font-weight: bold;
 }
 
-a.nav-link {
-  transition: color 0.3s;
+a.nav-link, .navbar-brand {
+  transition: color 0.2s;
 }
 
-a.nav-link:hover {
+a.nav-link:hover, .navbar-brand:hover {
   color:red !important;
-  transition: color 0.3s;
+  transition: color 0.2s;
 }
 
 .collapse {
