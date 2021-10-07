@@ -4,7 +4,8 @@
   "description": "A website for writing about and discussing topics in the field of Tech with other developers and enthusiasts.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node seeds/seed.js"
   },
   "repository": {
     "type": "git",
