@@ -3,7 +3,7 @@ const withAuth = require(`../../utils/auth`);
 const { Comment, Post, User } = require(`../../models`)
 
 router.post(`/login`, async (req, res) => {
-  console.log(`/login ROUTE SLAPPED`)
+  console.log(`/api/login ROUTE SLAPPED`)
   console.log(req.body)
   try {
     const userData = await User.findOne({ where: { user_name: req.body.user_name } });
@@ -14,6 +14,11 @@ router.post(`/login`, async (req, res) => {
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     };
+
+    const userDataFormatted = userData.get({ plain: true });
+    // let userInterests = userInterestsData.map((userInterest) => userInterest.get({ plain: true }));
+
+    console.log(userDataFormatted);
 
     const validPassword = await userData.checkPassword(req.body.password);
 
