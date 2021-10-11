@@ -21,3 +21,7 @@ a.nav-link:hover, .navbar-brand:hover {
 .collapse {
   flex-grow: 0;
 }
+
+.d-hidden {
+  visibility: hidden !important;
+}

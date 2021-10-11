@@ -52,14 +52,22 @@ router.post('/createaccount', async (req, res) => {
         .json({ message: 'The requested Username is already in use. Please enter a different username.' });
       return;
     }
+    console.log(`USERNAME NOT TAKEN`)
+    const newUser = await User.create(req.body);
+    console.log(newUser)
+    const newUserFormatted = await newUser.get({ plain: true })
 
+    req.session.save(() => {
+      req.session.user_id = newUserFormatted.id;
+      req.session.logged_in = true;
+
+      res.status(201).json({ message: `Account Creation successful!` });
+    })
 
   } catch (err) {
-
+    res.status(500).json({ message: `Something went wrong.` });
   }
-
-
-})
+});
 
 router.get(`/logout`, withAuth, (req, res) => {
   try {

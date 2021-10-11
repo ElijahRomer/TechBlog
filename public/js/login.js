@@ -29,11 +29,11 @@ const handleFormSubmit = async (e) => {
   };
 
   const hideErrorMsg = () => {
-    invalidMsgEl.classList.add("d-none")
+    invalidMsgEl.classList.add("d-hidden")
   };
 
   const revealErrorMsg = async (invalidMsgEl) => {
-    invalidMsgEl.classList.remove("d-none")
+    invalidMsgEl.classList.remove("d-hidden")
     await timeout(hideErrorMsg, 7000)
   };
 
