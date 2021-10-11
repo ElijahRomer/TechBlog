@@ -27,6 +27,15 @@ router.get(`/login`, (req, res) => {
   });
 });
 
+router.get(`/createaccount`, (req, res) => {
+  console.log(`/createaccount ROUTE SLAPPED`)
+  console.log(req.session)
+
+  res.render(`createAccount`, {
+    logged_in: req.session.logged_in
+  });
+});
+
 router.get(`/`, (req, res) => {
   console.log(`/ ROUTE SLAPPED`)
   console.log(req.session)

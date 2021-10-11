@@ -39,6 +39,26 @@ router.post(`/login`, async (req, res) => {
     console.log(err);
     res.status(500).send(err);
   }
+});
+
+router.post('/createaccount', async (req, res) => {
+  console.log('/api/createaccount ROUTE SLAPPED');
+  console.log(req.body);
+  try {
+    const usernameTaken = await User.findOne({ where: { user_name: req.body.user_name } })
+    if (usernameTaken) {
+      res
+        .status(409)
+        .json({ message: 'The requested Username is already in use. Please enter a different username.' });
+      return;
+    }
+
+
+  } catch (err) {
+
+  }
+
+
 })
 
 router.get(`/logout`, withAuth, (req, res) => {
