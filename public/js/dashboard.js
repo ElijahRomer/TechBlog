@@ -52,12 +52,37 @@ const handlePostSubmit = async (e) => {
   }
 };
 
-
-const renderUserBlogPosts = async () => {
-  console.log(`renderUserBlogPosts FIRED`);
-
+const editBlogPost = async (e) => {
+  console.log(`editBlogPost FIRED`)
+  let postId = e.target.id;
+  console.log(postId)
+};
+const deleteBlogPost = async (e) => {
+  console.log(`deleteBlogPost FIRED`);
+  let postId = e.target.id;
+  console.log(postId);
 };
 
-document.addEventListener('DOMContentLoaded', renderUserBlogPosts)
+const addBlogPostEditButtonEventListeners = async () => {
+  console.log(`addBlogPostEditButtonEventListeners FIRED`);
+
+  const editButtons = document.getElementsByClassName(`edit`);
+  for (let i = 0; i < editButtons.length; i++) {
+    editButtons[i].addEventListener(`click`, editBlogPost);
+  };
+};
+
+const addBlogPostDeleteButtonEventListeners = async () => {
+  console.log(`addBlogPostDeleteButtonEventListeners FIRED`);
+
+  const deleteButtons = document.getElementsByClassName(`delete`);
+  for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener(`click`, deleteBlogPost);
+  };
+};
+
+document.addEventListener('DOMContentLoaded', addBlogPostEditButtonEventListeners);
+
+document.addEventListener('DOMContentLoaded', addBlogPostDeleteButtonEventListeners);
 
 submitPostButton.addEventListener(`click`, handlePostSubmit);
