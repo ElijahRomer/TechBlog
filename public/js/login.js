@@ -1,4 +1,4 @@
-console.log(`woop woop`)
+console.log(`login client script successfully loaded.`)
 
 const handleFormSubmit = async (e) => {
   e.preventDefault();

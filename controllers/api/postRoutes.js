@@ -5,6 +5,37 @@ const { Comment, Post, User } = require(`../../models`)
 // ROUTES GO HERE
 router.get('/dashboard', async (req, res) => {
   res.json({ "msg": "/dashboard route response" })
+});
+
+router.post(`/submit`, withAuth, async (req, res) => {
+  console.log(`api/post/submit ROUTE SLAPPED`)
+  console.log(req.body)
+  console.log(req.session)
+  try {
+    const postTitleTaken = await Post.findOne({ where: { post_title: req.body.post_title } });
+
+    if (postTitleTaken) {
+      res
+        .status(409)
+        .json({ message: 'The post title entered is already in use. Please enter a different title for your post.' });
+      return;
+    }
+
+    const newPost = await Post.create({
+      creator_id: req.session.user_id,
+      post_title: req.body.post_title,
+      post_body: req.body.post_body,
+    });
+
+    console.log(newPost);
+    const newPostFormatted = await newPost.get({ plain: true });
+    console.log(newPostFormatted);
+    res.status(201).json({ message: `Post successfully saved!` })
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: `An error occured. Please contact support.` })
+  }
 })
 
 module.exports = router;

@@ -41,7 +41,7 @@ router.post(`/login`, async (req, res) => {
   }
 });
 
-router.post('/createaccount', async (req, res) => {
+router.post('/createaccount', withAuth, async (req, res) => {
   console.log('/api/createaccount ROUTE SLAPPED');
   console.log(req.body);
   try {
