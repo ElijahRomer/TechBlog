@@ -1,1 +1,24 @@
-<h1>dashboard</h1>
+<h1 class="text-center my-4">Dashboard</h1>
+<div class="card my-auto mx-auto col-12 col-md-10 col-lg-8">
+  <div class="card-body col-md-12 col-lg-8 mx-auto">
+    <h3 class="card-title">Create a new blog post!</h3>
+    <form>
+      <div class="mb-3">
+        <label for="post_title" class="form-label">Post Title</label>
+        <input name="post_title" type="text" class="form-control" id="post_title" value="Test Blog Post">
+      </div>
+      <div class="mb-3">
+        <label for="post_body" class="form-label">Post Body</label>
+        <textarea name="post_body" type="textarea" class="form-control" id="post_body" aria-describedby="postBodyHelp"
+          value="This is an awesome blog post that is a great example of a blog post made my a human in the 21st century that is writing a blog post on my tech blog internet website."></textarea>
+        <div id="postBodyHelp" class="form-text">(You can edit the post body later)</div>
+      </div>
+      <div class="d-flex align-center my-4">
+        <button type="button" class="btn btn-warning mx-auto col-12 col-md-6 col-lg-4" id="submit">Submit Blog
+          Post!</button>
+      </div>
+      <p class="text-danger d-hidden my-1 small" id="errorMsg">An error occured. Please contact support.</p>
+    </form>
+  </div>
+</div>
+<script src="/js/dashboard.js"></script>
