@@ -25,3 +25,9 @@ a.nav-link:hover, .navbar-brand:hover {
 .d-hidden {
   visibility: hidden !important;
 }
+
+.accordion-button {
+  font-weight: bolder !important;
+  font-size: large;
+  font-style: italic;
+}
