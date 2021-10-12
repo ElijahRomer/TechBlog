@@ -69,11 +69,12 @@
             <label for="post_body_edit" class="form-label">Update Post Body</label>
             <textarea name="post_body_edit" type="textarea" class="form-control" id="post_body_edit"
               aria-describedby="postBodyHelp"></textarea>
+            <input type="text" class="d-none" id="post_id_reference">
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="submit_post_update">Save changes</button>
       </div>
     </div>
   </div>

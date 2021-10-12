@@ -52,19 +52,23 @@ const handlePostSubmit = async (e) => {
   }
 };
 
-const editBlogPost = async (e) => {
+const openBlogPostEditor = async (e) => {
   console.log(`editBlogPost FIRED`);
 
   let postId = e.target.id;
   let post_titleEl = document.querySelector(`#title${postId}`);
   let post_bodyEl = document.querySelector(`#body${postId}`);
 
+
   let post_title = post_titleEl.textContent.trim();
   let post_body = post_bodyEl.textContent.trim();
 
   let post_title_editor = document.querySelector(`#post_title_edit`);
   let post_body_editor = document.querySelector(`#post_body_edit`);
+  let post_id_reference = document.querySelector(`#post_id_reference`);
 
+
+  post_id_reference.value = postId;
   post_title_editor.value = post_title.slice(1, -1);
   post_body_editor.textContent = post_body;
 
@@ -106,7 +110,7 @@ const addBlogPostEditButtonEventListeners = async () => {
 
   const editButtons = document.getElementsByClassName(`edit`);
   for (let i = 0; i < editButtons.length; i++) {
-    editButtons[i].addEventListener(`click`, editBlogPost);
+    editButtons[i].addEventListener(`click`, openBlogPostEditor);
   };
 };
 
