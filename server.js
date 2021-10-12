@@ -2,6 +2,7 @@ const path = require(`path`)
 const express = require(`express`);
 const session = require(`express-session`);
 const app = express();
+const helpers = require(`./utils/formatDateTime`)
 const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 3001;
 const routes = require(`./controllers`);
@@ -43,8 +44,10 @@ const sess = {
 // Tell express to use the express-session middleware, which will save only the sessionID to the HTTP req/res. The actual session data is saved on the server side in the SQL database as defined above in the "store" option of the "sess" options object. 
 app.use(session(sess));
 
+
+
 // Set Handlebars as View Engine
-const hbs = exphbs.create();
+const hbs = exphbs.create({ helpers });
 app.set('view engine', 'handlebars')
 app.engine('handlebars', hbs.engine);
 

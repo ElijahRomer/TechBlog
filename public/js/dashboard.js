@@ -57,7 +57,8 @@ const openBlogPostEditor = async (e) => {
   console.log(`editBlogPost FIRED`);
 
   let postId = e.target.id;
-  let post_titleEl = document.querySelector(`#title${postId}`);
+  let post_titleEl = document.getElementById(`title${postId}`).firstChild.nextSibling;
+  console.log(post_titleEl)
   let post_bodyEl = document.querySelector(`#body${postId}`);
 
 
