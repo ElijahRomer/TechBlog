@@ -105,7 +105,7 @@ const submitBlogPostEdit = async (e) => {
 
     console.log(response);
     console.log(response.status);
-
+    document.location.reload()
   } catch (error) {
     console.log(error)
   }
