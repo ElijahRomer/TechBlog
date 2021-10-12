@@ -80,10 +80,11 @@ const openBlogPostEditor = async (e) => {
 };
 
 const submitBlogPostEdit = async (e) => {
+  e.preventDefault();
   console.log(`submitBlogPostEdit FIRED`);
   let post_id = document.querySelector(`#post_id_reference`).value;
   let post_title = document.querySelector(`#post_title_edit`).value;
-  let post_body = document.querySelector(`#post_body_edit`).textContent;
+  let post_body = document.querySelector(`#post_body_edit`).value;
 
   let updateData = {
     id: parseInt(post_id),
@@ -92,6 +93,7 @@ const submitBlogPostEdit = async (e) => {
   };
 
   console.log(updateData);
+
   try {
     const response = await fetch(`api/post/update`, {
       method: "PUT",

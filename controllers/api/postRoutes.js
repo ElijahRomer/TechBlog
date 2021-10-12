@@ -64,13 +64,16 @@ router.put(`/update`, async (req, res) => {
     //   }
     // );
 
-    await Post.update({
+    let updatePost = await Post.update({
+      post_title: req.body.post_title,
       post_body: req.body.post_body,
     },
       {
         where: { id: req.body.id }
       }
     );
+
+    console.log(updatePost);
 
     res.status(200).json();
 
