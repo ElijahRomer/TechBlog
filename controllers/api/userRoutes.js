@@ -30,6 +30,7 @@ router.post(`/login`, async (req, res) => {
     }
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.user_name = userData.user_name;
       req.session.logged_in = true;
 
       res.json({ message: `Login attempt successful!` })
@@ -41,7 +42,7 @@ router.post(`/login`, async (req, res) => {
   }
 });
 
-router.post('/createaccount', withAuth, async (req, res) => {
+router.post('/createaccount', async (req, res) => {
   console.log('/api/createaccount ROUTE SLAPPED');
   console.log(req.body);
   try {
@@ -59,6 +60,7 @@ router.post('/createaccount', withAuth, async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = newUserFormatted.id;
+      req.session.user_name = newUserFormatted.user_name;
       req.session.logged_in = true;
 
       res.status(201).json({ message: `Account Creation successful!` });

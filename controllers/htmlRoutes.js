@@ -19,18 +19,11 @@ router.get(`/dashboard`, withAuth, async (req, res) => {
 
     const userPosts = rawUserPostData.map((post) => post.get({ plain: true }));
 
-    // console.log(userPosts);
-    // userPosts.forEach((post) => {
-    //   post.createdAt = format_date_time(post.createdAt);
-    //   post.updatedAt = format_date_time(post.updatedAt);
-    // });
-
     console.log(userPosts);
-
-
 
     res.render(`dashboard`, {
       logged_in: req.session.logged_in,
+      user_name: req.session.user_name,
       userPosts,
     });
   } catch (err) {

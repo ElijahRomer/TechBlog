@@ -17,13 +17,14 @@ const hideErrorMsg = () => {
 const revealErrorMsg = async (invalidMsgEl, message) => {
   invalidMsgEl.textContent = message;
   invalidMsgEl.classList.remove("d-hidden")
-  await timeout(hideErrorMsg, 7000)
+  await timeout(hideErrorMsg, 10000)
 };
 
 
 
 const handleFormSubmit = async (e) => {
   e.preventDefault();
+  console.log(`handleFormSubmit FIRED`)
   let user_name = document.querySelector(`#user_name`).value;
   let password = document.querySelector(`#password`).value;
 
@@ -56,9 +57,10 @@ const handleFormSubmit = async (e) => {
     revealErrorMsg(invalidMsgEl, `The Server encountered an error. Please contact support.`);
     return
   }
-
-  document.location.replace('/dashboard');
-  return;
+  if (response.status === 201) {
+    document.location.replace('/dashboard');
+    return;
+  }
 }
 
 
