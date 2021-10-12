@@ -53,9 +53,28 @@ const handlePostSubmit = async (e) => {
 };
 
 const editBlogPost = async (e) => {
-  console.log(`editBlogPost FIRED`)
+  console.log(`editBlogPost FIRED`);
+
   let postId = e.target.id;
-  console.log(postId)
+  let post_titleEl = document.querySelector(`#title${postId}`);
+  let post_bodyEl = document.querySelector(`#body${postId}`);
+
+  let post_title = post_titleEl.textContent.trim();
+  let post_body = post_bodyEl.textContent.trim();
+
+  let post_title_editor = document.querySelector(`#post_title_edit`);
+  let post_body_editor = document.querySelector(`#post_body_edit`);
+
+  post_title_editor.value = post_title.slice(1, -1);
+  post_body_editor.textContent = post_body;
+
+  console.log(postId);
+  console.log(post_title);
+  console.log(post_body);
+
+
+
+
 };
 const deleteBlogPost = async (e) => {
   console.log(`deleteBlogPost FIRED`);
