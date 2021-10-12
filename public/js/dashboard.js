@@ -2,6 +2,7 @@ console.log(`dashboard client script successfully loaded.`)
 
 
 const submitPostButton = document.querySelector(`#submit`);
+const updatePostButton = document.querySelector(`#submit_post_update`);
 
 const invalidMsgEl = document.querySelector(`#errorMsg`);
 
@@ -76,10 +77,38 @@ const openBlogPostEditor = async (e) => {
   console.log(post_title);
   console.log(post_body);
 
-
-
-
 };
+
+const submitBlogPostEdit = async (e) => {
+  console.log(`submitBlogPostEdit FIRED`);
+  let post_id = document.querySelector(`#post_id_reference`).value;
+  let post_title = document.querySelector(`#post_title_edit`).value;
+  let post_body = document.querySelector(`#post_body_edit`).textContent;
+
+  let updateData = {
+    id: parseInt(post_id),
+    post_title,
+    post_body,
+  };
+
+  console.log(updateData);
+  try {
+    const response = await fetch(`api/post/update`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updateData)
+    });
+
+    console.log(response);
+    console.log(response.status);
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const deleteBlogPost = async (e) => {
   console.log(`deleteBlogPost FIRED`);
   let postId = e.target.id;
@@ -126,5 +155,7 @@ const addBlogPostDeleteButtonEventListeners = async () => {
 document.addEventListener('DOMContentLoaded', addBlogPostEditButtonEventListeners);
 
 document.addEventListener('DOMContentLoaded', addBlogPostDeleteButtonEventListeners);
+
+updatePostButton.addEventListener(`click`, submitBlogPostEdit);
 
 submitPostButton.addEventListener(`click`, handlePostSubmit);

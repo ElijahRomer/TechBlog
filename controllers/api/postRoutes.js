@@ -38,6 +38,48 @@ router.post(`/submit`, withAuth, async (req, res) => {
   }
 });
 
+router.put(`/update`, async (req, res) => {
+  console.log(`/api/post/update ROUTE SLAPPED`);
+  console.log(req.body);
+
+  try {
+    // const postTitleTaken = await Post.findOne({
+    //   where: {
+    //     post_title: req.body.post_title
+    //   }
+    // });
+
+    // if (postTitleTaken) {
+    //   res
+    //     .status(409)
+    //     .json({ message: 'The post title entered is already in use. Please enter a different title for your post.' });
+    //   return;
+    // }
+
+    // await Post.update({
+    //   post_title: req.body.post_title,
+    // },
+    //   {
+    //     where: { id: req.body.id }
+    //   }
+    // );
+
+    await Post.update({
+      post_body: req.body.post_body,
+    },
+      {
+        where: { id: req.body.id }
+      }
+    );
+
+    res.status(200).json();
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: `An error occured. Please contact support.` })
+  }
+});
+
 router.delete(`/delete`, async (req, res) => {
   console.log(`api/post/delete ROUTE SLAPPED`);
   console.log(req.body)
