@@ -27,14 +27,17 @@
           <div id="body{{post.id}}" class="accordion-body">
             {{post.post_body}}
             <div class="text-center my-2">
-              <hr>
-              <small>Last Updated: {{format_date_time post.updatedAt}}</small>
             </div>
+          </div>
+          <hr>
+          <div class="text-center my-1">
+            <small>Last Updated: {{format_date_time post.updatedAt}}</small>
           </div>
           <div class="d-flex justify-content-center" id="postManageBtns">
             <button class="btn btn-warning col-3 mx-2 my-1 edit" id="{{post.id}}" type="button" data-bs-toggle="modal"
               data-bs-target="#editPostModal">Edit</button>
-            <button class="btn btn-danger col-3 mx-2 my-1 delete" id="{{post.id}}">Delete</button>
+            <button class="btn btn-danger col-3 mx-2 my-1 delete" id="{{post.id}}" data-bs-toggle="modal"
+              data-bs-target="#confirmPostDeleteModal">Delete</button>
           </div>
         </div>
       </div>
@@ -42,6 +45,10 @@
     </div>
   </div>
 </div>
+
+{{!-- <button class="btn btn-danger col-3 mx-2 my-1 edit" id="{{post.id}}" type="button" data-bs-toggle="modal"
+  data-bs-target="#confirmPostDeleteModal">Delete</button> --}}
+
 <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -64,7 +71,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="submit_post_update">Save changes</button>
+        <button type="button" class="btn btn-warning" id="submit_post_update">Save changes</button>
       </div>
     </div>
   </div>
@@ -83,7 +90,7 @@
         <form>
           <div class="mb-3">
             <label for="post_title" class="form-label">Post Title</label>
-            <input name="post_title" type="text" class="form-control" id="post_title" value="Test Blog Post">
+            <input name="post_title" type="text" class="form-control" id="post_title">
           </div>
           <div class="mb-3">
             <label for="post_body" class="form-label">Post Body</label>
@@ -96,8 +103,31 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <div class="d-flex align-center my-4">
-          <button type="button" class="btn btn-warning mx-auto col-12 col-md-6 col-lg-4" id="submit">Submit Blog
+          <button type="button" class="btn btn-warning" id="submit">Submit Blog
             Post!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="confirmPostDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-danger">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this blog post?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger d-hidden my-1 small" id="errorMsg">An error occured. Please contact support.</p>
+        <p>This action cannot be undone!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="d-flex align-center my-4">
+          <button type="button" class="btn btn-danger delete-post">Permanently Delete Post</button>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 console.log(`dashboard client script successfully loaded.`)
 
+let selectedPost;
 
 const submitPostButton = document.querySelector(`#submit`);
 const updatePostButton = document.querySelector(`#submit_post_update`);
@@ -110,11 +111,17 @@ const submitBlogPostEdit = async (e) => {
   } catch (error) {
     console.log(error)
   }
+};
+
+const updateSelectedPost = (e) => {
+  console.log(`setUpDeleteBlogPostModal FIRED`);
+  e.preventDefault();
+  selectedPost = e.target.id;
 }
 
 const deleteBlogPost = async (e) => {
   console.log(`deleteBlogPost FIRED`);
-  let postId = e.target.id;
+  let postId = selectedPost;
   console.log(postId);
 
   try {
@@ -151,9 +158,11 @@ const addBlogPostDeleteButtonEventListeners = async () => {
 
   const deleteButtons = document.getElementsByClassName(`delete`);
   for (let i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener(`click`, deleteBlogPost);
+    deleteButtons[i].addEventListener(`click`, updateSelectedPost);
   };
 };
+
+document.querySelector(`.delete-post`).addEventListener(`click`, deleteBlogPost);
 
 document.addEventListener('DOMContentLoaded', addBlogPostEditButtonEventListeners);
 
