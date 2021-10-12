@@ -109,7 +109,8 @@ const submitBlogPostEdit = async (e) => {
     console.log(response.status);
     document.location.reload()
   } catch (error) {
-    console.log(error)
+    console.log(err);
+    revealErrorMsg(invalidMsgEl, "An error occured. Please contact support.")
   }
 };
 
