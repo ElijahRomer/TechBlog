@@ -61,6 +61,25 @@ const deleteBlogPost = async (e) => {
   console.log(`deleteBlogPost FIRED`);
   let postId = e.target.id;
   console.log(postId);
+
+  try {
+    const response = await fetch(`api/post/delete`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        post_id: postId,
+      })
+    });
+    console.log(response)
+    document.location.reload();
+
+
+  } catch (err) {
+    console.log(err);
+    revealErrorMsg(invalidMsgEl, "An error occured. Please contact support.")
+  }
 };
 
 const addBlogPostEditButtonEventListeners = async () => {

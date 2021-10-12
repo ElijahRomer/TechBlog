@@ -36,6 +36,25 @@ router.post(`/submit`, withAuth, async (req, res) => {
     console.log(err);
     res.status(500).json({ message: `An error occured. Please contact support.` })
   }
+});
+
+router.delete(`/delete`, async (req, res) => {
+  console.log(`api/post/delete ROUTE SLAPPED`);
+  console.log(req.body)
+  try {
+    let response = await Post.destroy({ where: { id: req.body.post_id } });
+
+    if (response > 0) {
+      res.status(200).json();
+      return;
+    }
+    res.status(404).json();
+    return;
+
+  } catch (err) {
+
+  }
+
 })
 
 module.exports = router;
