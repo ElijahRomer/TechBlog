@@ -27,11 +27,11 @@
       </p>
       <hr class="mb-0">
       <div class="card-body mt-0">
-        <div class="comments-section mt-3">
+        <div id="post-{{blogPost.id}}-comment-section" class="comments-section mt-3">
           <h4>Comments</h4>
           <div>
             {{#if ../logged_in}}
-            <div class="input-group mb-2">
+            <div class="input-group mb-2" id="comment-form-{{blogPost.id}}">
               <input type="text" class="form-control" id="new-comment-body-{{blogPost.id}}"
                 placeholder="Type comment here..." aria-label="Comment" aria-describedby="basic-addon1">
               <button class="btn btn-warning submit-comment" id="{{blogPost.id}}">
@@ -40,7 +40,7 @@
             </div>
             {{/if}}
             {{#each blogPost.comments as |comment|}}
-            <div class="container" id="post-{{blogPost.id}}-comment-section">
+            <div class="container">
               <div class="row">
                 <div class="card my-3">
                   <small class="text-muted">On {{format_date_time comment.createdAt}}, {{comment.user.user_name}} said:

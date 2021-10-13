@@ -11,7 +11,9 @@ router.post(`/`, withAuth, async (req, res) => {
       comment_body: req.body.comment_body,
     });
 
-    res.status(201).json({ message: `Comment successfully saved!` })
+    newComment.user_name = req.session.user_name;
+
+    res.status(201).json(newComment);
 
   } catch (err) {
     console.log(err);
