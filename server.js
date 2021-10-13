@@ -2,11 +2,17 @@ const path = require(`path`)
 const express = require(`express`);
 const session = require(`express-session`);
 const app = express();
-const helpers = require(`./utils/formatDateTime`)
+const dateTimeFormatters = require(`./utils/formatDateTime`)
+const isEqual = require(`./utils/isEqual`)
 const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 3001;
 const routes = require(`./controllers`);
 const logger = require("morgan");
+
+const helpers = {
+  ...dateTimeFormatters,
+  isEqual,
+}
 
 
 // Database connection

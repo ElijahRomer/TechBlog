@@ -23,4 +23,24 @@ router.post(`/`, withAuth, async (req, res) => {
   };
 })
 
+router.put(`/`, withAuth, async (req, res) => {
+  console.log(`PUT "api/comment/" ROUTE SLAPPED`);
+  try {
+
+  } catch (err) {
+    console.log(err);
+    res.render(`error`, { err });
+  }
+});
+
+router.delete(`/`, withAuth, async (req, res) => {
+  console.log(`DELETE "api/comment/" ROUTE SLAPPED`);
+  try {
+
+  } catch (err) {
+    console.log(err);
+    res.render(`error`, { err });
+  }
+});
+
 module.exports = router;

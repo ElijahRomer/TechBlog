@@ -17,7 +17,7 @@
   {
     "creator_id": 3,
     "post_id": 2,
-    "comment_body": "The Browser Tools are definitely important- but be prepared for when you start working with Node.js as you can't use them to debug backend code so much."
+    "comment_body": "The Browser Tools are definitely important- but be prepared for when you start working with Node.js as you can't use them to debug backend code as much."
   },
   {
     "creator_id": 1,

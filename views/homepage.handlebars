@@ -46,6 +46,16 @@
                   <small class="text-muted">On {{format_date_time comment.createdAt}}, {{comment.user.user_name}} said:
                   </small>
                   <p>{{comment.comment_body}}</p>
+                  {{!-- <h1>COMMENTER {{comment.user.id}}</h1>
+                  <h1>LOGGED IN USER {{../../current_user_id}}</h1> --}}
+                  {{#if (isEqual ../../current_user_id comment.user.id) }}
+                  <div class="d-flex justify-content-center" id="postManageBtns">
+                    <button class="btn btn-warning col-3 mx-2 my-1 edit" id="{{post.id}}" type="button"
+                      data-bs-toggle="modal" data-bs-target="#editPostModal">Edit</button>
+                    <button class="btn btn-danger col-3 mx-2 my-1 delete" id="{{post.id}}" data-bs-toggle="modal"
+                      data-bs-target="#confirmPostDeleteModal">Delete</button>
+                  </div>
+                  {{/if}}
                 </div>
               </div>
             </div>

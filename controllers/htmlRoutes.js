@@ -78,16 +78,21 @@ router.get(`/`, async (req, res) => {
         {
           model: Comment,
           attributes: ['id', 'comment_body', 'createdAt'],
-          include: [{ model: User, attributes: ['user_name'] }]
+          include: [{ model: User, attributes: ['id', 'user_name'] }]
         }
       ]
     });
 
     const blogPostData = rawBlogPostData.map((blogPost) => blogPost.get({ plain: true }));
 
+    const current_user_id = req.session.user_id;
+    console.log(blogPostData[0].comments);
+    console.log(current_user_id);
+
     res.render(`homepage`, {
       logged_in: req.session.logged_in,
       blogPostData,
+      current_user_id,
     });
   } catch (err) {
     console.log(err);
