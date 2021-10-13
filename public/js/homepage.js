@@ -30,8 +30,6 @@ const submitCommentToServer = async (commentData) => {
 const appendCommentToPage = (newComment) => {
   console.log(newComment);
   const relevantBlogPostForm = document.getElementById(`comment-form-${newComment.post_id}`);
-  // const newCommentEl = document.createElement('div');
-  // newCommentEl.classList.add("container");
   let newCommentHTML = `
   <div class="container">
     <div class="row">
@@ -42,9 +40,9 @@ const appendCommentToPage = (newComment) => {
       </div>
     </div>
   </div>
-  `
+  `;
 
-  relevantBlogPostForm.insertAdjacentHTML('afterend', newCommentHTML);;
+  relevantBlogPostForm.insertAdjacentHTML('afterend', newCommentHTML);
 }
 
 const handleCommentSubmit = async (e) => {
@@ -52,16 +50,19 @@ const handleCommentSubmit = async (e) => {
   console.log(`handleCommentSubmit FIRED`);
   let post_id = e.target.id;
   let comment_body = document.getElementById(`new-comment-body-${post_id}`).value;
+
+  document.getElementById(`new-comment-body-${post_id}`).value = '';
+
   let commentData = {
     post_id,
     comment_body,
   }
-  console.log(commentData);
+
   let newComment = await submitCommentToServer(commentData)
     .then(comment => comment.json())
     .then(comment => comment);
 
-  console.log(newComment);
+
   appendCommentToPage(newComment);
 
 };
