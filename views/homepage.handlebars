@@ -30,6 +30,7 @@
         <div class="comments-section mt-3">
           <h4>Comments</h4>
           <div>
+            {{#if ../logged_in}}
             <div class="input-group mb-2">
               <input type="text" class="form-control" placeholder="Type comment here..." aria-label="Comment"
                 aria-describedby="basic-addon1">
@@ -37,6 +38,7 @@
                 Leave Comment
               </button>
             </div>
+            {{/if}}
             {{#each blogPost.comments as |comment|}}
             <div class="comment container">
               <div class="row">
