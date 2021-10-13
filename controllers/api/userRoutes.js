@@ -74,7 +74,7 @@ router.post('/createaccount', async (req, res) => {
 router.get(`/logout`, withAuth, (req, res) => {
   try {
     req.session.destroy(() => {
-      res.redirect(`../../`);
+      res.render(`logOutRedirect`)
     });
   } catch (err) {
     console.log(err);
