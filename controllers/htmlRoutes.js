@@ -50,13 +50,40 @@ router.get(`/createaccount`, (req, res) => {
   });
 });
 
-router.get(`/`, (req, res) => {
+
+router.get(`/`, async (req, res) => {
   console.log(`/ ROUTE SLAPPED`)
   console.log(req.session)
+  try {
+    let rawBlogPostData = await Post.findAll({
+      attributes: ["id", "creator_Id", "post_title", "post_body", "createdAt", "updatedAt"],
+      include: [
+        {
+          model: User,
+          attributes: ['user_name']
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'comment_body', 'createdAt'],
+          include: [{ model: User, attributes: ['user_name'] }]
+        }
+      ]
+    });
 
+    const blogPostData = rawBlogPostData.map((blogPost) => blogPost.get({ plain: true }));
 
-  res.render(`homepage`, {
-    logged_in: req.session.logged_in
-  });
+    console.log(blogPostData[0]);
+    console.log(blogPostData[0].comments);
+    console.log(blogPostData[0].comments);
+
+    res.render(`homepage`, {
+      logged_in: req.session.logged_in,
+      blogPostData,
+    });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  };
 });
+
 module.exports = router;
