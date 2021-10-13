@@ -47,13 +47,13 @@
                     ../../current_user_id comment.user.id) }}you{{/if}}{{#unless (isEqual ../../current_user_id
                     comment.user.id)}}{{comment.user.user_name}}{{/unless}} said:
                   </small>
-                  <p>{{comment.comment_body}}</p>
+                  <p id="comment-body-{{comment.id}}">{{comment.comment_body}}</p>
                   {{#if (isEqual ../../current_user_id comment.user.id) }}
-                  <div class="d-flex justify-content-center" id="postManageBtns">
-                    <button class="btn btn-warning col-3 mx-2 my-1 edit" id="{{post.id}}" type="button"
-                      data-bs-toggle="modal" data-bs-target="#editPostModal">Edit</button>
-                    <button class="btn btn-danger col-3 mx-2 my-1 delete" id="{{post.id}}" data-bs-toggle="modal"
-                      data-bs-target="#confirmPostDeleteModal">Delete</button>
+                  <div class="d-flex justify-content-center" id="commentManageBtns">
+                    <button class="btn btn-warning col-3 mx-2 my-1 edit" id="{{comment.id}}" type="button"
+                      data-bs-toggle="modal" data-bs-target="#editCommentModal">Edit</button>
+                    <button class="btn btn-danger col-3 mx-2 my-1 delete" id="{{comment.id}}" data-bs-toggle="modal"
+                      data-bs-target="#confirmCommentDeleteModal">Delete</button>
                   </div>
                   {{/if}}
                 </div>
@@ -70,7 +70,7 @@
 <br>
 {{/each}}
 
-<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -80,22 +80,22 @@
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="post_body_edit" class="form-label">Make changes below and click save to confirm.</label>
-            <textarea name="post_body_edit" type="textarea" class="form-control" id="post_body_edit"
-              aria-describedby="postBodyHelp"></textarea>
-            <input type="text" class="d-none" id="post_id_reference">
+            <label for="comment_body_edit" class="form-label">Make changes below and click save to confirm.</label>
+            <textarea name="comment_body_edit" type="textarea" class="form-control" id="comment_body_edit"
+              aria-describedby="commentBodyHelp"></textarea>
+            <input type="text" class="d-none" id="comment_id_reference">
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning" id="submit_post_update">Save changes</button>
+        <button type="button" class="btn btn-warning" id="submit_comment_edit">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 </div>
 
-<div class="modal fade" id="confirmPostDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="confirmCommentDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -110,7 +110,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <div class="d-flex align-center my-4">
-          <button type="button" class="btn btn-danger delete-post">Delete Comment</button>
+          <button type="button" class="btn btn-danger" id="submit-comment-delete">Delete Comment</button>
         </div>
       </div>
     </div>

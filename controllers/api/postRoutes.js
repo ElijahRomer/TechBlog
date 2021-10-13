@@ -43,26 +43,6 @@ router.put(`/update`, async (req, res) => {
   console.log(req.body);
 
   try {
-    // const postTitleTaken = await Post.findOne({
-    //   where: {
-    //     post_title: req.body.post_title
-    //   }
-    // });
-
-    // if (postTitleTaken) {
-    //   res
-    //     .status(409)
-    //     .json({ message: 'The post title entered is already in use. Please enter a different title for your post.' });
-    //   return;
-    // }
-
-    // await Post.update({
-    //   post_title: req.body.post_title,
-    // },
-    //   {
-    //     where: { id: req.body.id }
-    //   }
-    // );
 
     let updatePost = await Post.update({
       post_title: req.body.post_title,

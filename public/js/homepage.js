@@ -19,7 +19,6 @@ const submitCommentToServer = async (commentData) => {
       body: JSON.stringify(commentData)
     });
 
-    console.log(response);
     return response;
 
   } catch (err) {
@@ -28,15 +27,20 @@ const submitCommentToServer = async (commentData) => {
 };
 
 const appendCommentToPage = (newComment) => {
-  console.log(newComment);
   const relevantBlogPostForm = document.getElementById(`comment-form-${newComment.post_id}`);
   let newCommentHTML = `
   <div class="container">
     <div class="row">
       <div class="card my-3">
-        <small class="text-muted">On ${format_date_time(newComment.createdAt)}, ${newComment.user_name} said:
+        <small class="text-muted">On ${format_date_time(newComment.createdAt)}, you said:
         </small>
         <p>${newComment.comment_body}</p>
+        <div class="d-flex justify-content-center" id="postManageBtns">
+          <button class="btn btn-warning col-3 mx-2 my-1 edit" id="${newComment.id}" type="button"
+            data-bs-toggle="modal" data-bs-target="#editPostModal">Edit</button>
+          <button class="btn btn-danger col-3 mx-2 my-1 delete" id="${newComment.id}" data-bs-toggle="modal"
+          data-bs-target="#confirmPostDeleteModal">Delete</button>
+        </div>
       </div>
     </div>
   </div>
@@ -64,8 +68,57 @@ const handleCommentSubmit = async (e) => {
 
 
   appendCommentToPage(newComment);
+};
+
+const populateCommentEditModal = (e) => {
+  console.log(`populateCommentEditModal FIRED`);
+  // capture relevant content
+  const comment_id = e.target.id;
+  const comment_body = document.getElementById(`comment-body-${comment_id}`);
+
+  // capture relevant fields in edit modal
+  const commentEditFieldEl = document.getElementById(`comment_body_edit`);
+  const commentIdReferenceField = document.getElementById(`comment_id_reference`);
+
+  // populate relevant fields in edit modal
+  commentEditFieldEl.textContent = comment_body.textContent;
+  commentIdReferenceField.value = comment_id;
 
 };
+
+const submitCommentEdit = async () => {
+  console.log(`submitCommentEdit FIRED`)
+  const comment_body = document.getElementById(`comment_body_edit`).value;
+  const comment_id = document.getElementById(`comment_id_reference`).value;
+
+  const commentEditData = {
+    id: comment_id,
+    comment_body,
+  }
+
+  console.log(commentEditData);
+
+  try {
+    let response = await fetch(`/api/comment/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(commentEditData)
+    });
+
+    if (response.ok) {
+      document.location.reload();
+      return;
+    }
+    document.location.replace(`/error`)
+
+  } catch (err) {
+    document.location.replace(`/error`)
+  }
+};
+
+
 
 const addCommentButtonEventListeners = () => {
   console.log(`addCommentButtonEventListeners FIRED`)
@@ -77,4 +130,83 @@ const addCommentButtonEventListeners = () => {
   console.log(`Event listeners added to comment submit buttons.`)
 };
 
+const addEditCommentButtonEventListeners = () => {
+  console.log(`addEditCommentButtonEventListeners FIRED`);
+  const editCommentButtons = document.getElementsByClassName(`edit`);
+  for (let i = 0; i < editCommentButtons.length; i++) {
+    editCommentButtons[i].addEventListener(`click`, populateCommentEditModal);
+  }
+}
+
+const addSubmitCommentEditButtonEventListener = () => {
+  console.log(`addSubmitCommentEditButtonEventListeners FIRED`)
+  const submitCommentEditButton = document.getElementById(`submit_comment_edit`);
+
+  submitCommentEditButton.addEventListener(`click`, submitCommentEdit)
+
+  console.log(`Event listeners added to comment edit buttons.`)
+};
+
+
+// BEGIN DELETE COMMENT BUTTON LOGIC
+let selectedComment;
+
+const submitCommentDelete = async () => {
+  console.log(`submitCommentDelete FIRED`);
+  console.log(`SELECTED COMMENT ID IS ${selectedComment}`);
+
+  try {
+    let response = await fetch(`/api/comment/`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: selectedComment })
+    });
+
+    if (response.ok) {
+      document.location.reload();
+      return;
+    }
+    document.location.replace(`/error`)
+
+  } catch (err) {
+    document.location.replace(`/error`)
+  }
+
+
+
+
+};
+
+const updateSelectedComment = (e) => {
+  console.log(`updateSelectedComment FIRED`);
+  selectedComment = e.target.id;
+}
+
+const addDeleteCommentButtonEventListeners = () => {
+  console.log(`addSubmitCommentDeleteButtonEventListeners FIRED`)
+  const commentDeleteButtons = document.getElementsByClassName(`delete`);
+
+  for (let i = 0; i < commentDeleteButtons.length; i++) {
+    commentDeleteButtons[i].addEventListener(`click`, updateSelectedComment);
+  }
+  console.log(`Event listeners added to comment delete buttons.`)
+};
+
+const addSubmitDeleteCommentButtonEventListener = (e) => {
+  console.log(`addDeleteCommentButtonEventListener FIRED`);
+  e.preventDefault();
+  document.getElementById(`submit-comment-delete`).addEventListener(`click`, submitCommentDelete)
+};
+
+
 document.addEventListener(`DOMContentLoaded`, addCommentButtonEventListeners);
+
+document.addEventListener(`DOMContentLoaded`, addEditCommentButtonEventListeners);
+
+document.addEventListener(`DOMContentLoaded`, addDeleteCommentButtonEventListeners);
+
+document.addEventListener(`DOMContentLoaded`, addSubmitCommentEditButtonEventListener);
+
+document.addEventListener(`DOMContentLoaded`, addSubmitDeleteCommentButtonEventListener);
