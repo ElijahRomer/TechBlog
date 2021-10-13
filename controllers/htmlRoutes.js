@@ -57,10 +57,16 @@ router.get(`/createaccount`, (req, res) => {
   }
 });
 
+router.get(`/error`, (req, res) => {
+  console.log(`/error ROUTE SLAPPED`)
+  let err = req.body.err;
+  res.render(`error`, { err });
+
+});
+
 
 router.get(`/`, async (req, res) => {
   console.log(`/ ROUTE SLAPPED`)
-  console.log(req.session)
   try {
     let rawBlogPostData = await Post.findAll({
       attributes: ["id", "creator_Id", "post_title", "post_body", "createdAt", "updatedAt"],
@@ -78,10 +84,6 @@ router.get(`/`, async (req, res) => {
     });
 
     const blogPostData = rawBlogPostData.map((blogPost) => blogPost.get({ plain: true }));
-
-    console.log(blogPostData[0]);
-    console.log(blogPostData[0].comments);
-    console.log(blogPostData[0].comments);
 
     res.render(`homepage`, {
       logged_in: req.session.logged_in,

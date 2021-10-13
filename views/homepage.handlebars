@@ -32,15 +32,15 @@
           <div>
             {{#if ../logged_in}}
             <div class="input-group mb-2">
-              <input type="text" class="form-control" placeholder="Type comment here..." aria-label="Comment"
-                aria-describedby="basic-addon1">
-              <button class="btn btn-warning ">
+              <input type="text" class="form-control" id="new-comment-body-{{blogPost.id}}"
+                placeholder="Type comment here..." aria-label="Comment" aria-describedby="basic-addon1">
+              <button class="btn btn-warning submit-comment" id="{{blogPost.id}}">
                 Leave Comment
               </button>
             </div>
             {{/if}}
             {{#each blogPost.comments as |comment|}}
-            <div class="comment container">
+            <div class="container" id="post-{{blogPost.id}}-comment-section">
               <div class="row">
                 <div class="card my-3">
                   <small class="text-muted">On {{format_date_time comment.createdAt}}, {{comment.user.user_name}} said:
@@ -50,14 +50,6 @@
               </div>
             </div>
             {{/each}}
-            {{!-- <div class="comment container">
-              <div class="row">
-                <div class="card my-3">
-                  <small class="text-muted">On October 12th, 2021, Lernantino said: </small>
-                  <p>You will never know anything until you understand that you fundamentally know nothing.</p>
-                </div>
-              </div>
-            </div> --}}
           </div>
         </div>
       </div>
@@ -67,3 +59,4 @@
 
 <br>
 {{/each}}
+<script src="/js/homepage.js"></script>
