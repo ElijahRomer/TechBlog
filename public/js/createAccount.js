@@ -24,7 +24,6 @@ const revealErrorMsg = async (invalidMsgEl, message) => {
 
 const handleFormSubmit = async (e) => {
   e.preventDefault();
-  console.log(`handleFormSubmit FIRED`)
   let user_name = document.querySelector(`#user_name`).value;
   let password = document.querySelector(`#password`).value;
 
@@ -35,7 +34,6 @@ const handleFormSubmit = async (e) => {
   }
   let accountData = { user_name, password }
 
-  console.log(accountData)
 
 
   const response = await fetch(`/api/user/createaccount`, {
@@ -46,7 +44,6 @@ const handleFormSubmit = async (e) => {
     body: JSON.stringify(accountData)
   })
 
-  console.log(response.status);
 
   if (response.status === 409) {
     console.log(`username already taken`);

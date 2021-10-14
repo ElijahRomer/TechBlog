@@ -45,7 +45,7 @@ const appendCommentToPage = (newComment) => {
 
 const handleCommentSubmit = async (e) => {
   e.preventDefault();
-  console.log(`handleCommentSubmit FIRED`);
+  // console.log(`handleCommentSubmit FIRED`);
   let post_id = e.target.id;
   let comment_body = document.getElementById(`new-comment-body-${post_id}`).value;
 
@@ -65,7 +65,7 @@ const handleCommentSubmit = async (e) => {
 };
 
 const populateCommentEditModal = (e) => {
-  console.log(`populateCommentEditModal FIRED`);
+  // console.log(`populateCommentEditModal FIRED`);
   // capture relevant content
   const comment_id = e.target.id;
   const comment_body = document.getElementById(`comment-body-${comment_id}`);
@@ -81,7 +81,7 @@ const populateCommentEditModal = (e) => {
 };
 
 const submitCommentEdit = async () => {
-  console.log(`submitCommentEdit FIRED`)
+  // console.log(`submitCommentEdit FIRED`)
   const comment_body = document.getElementById(`comment_body_edit`).value;
   const comment_id = document.getElementById(`comment_id_reference`).value;
 
@@ -90,7 +90,7 @@ const submitCommentEdit = async () => {
     comment_body,
   }
 
-  console.log(commentEditData);
+  // console.log(commentEditData);
 
   try {
     let response = await fetch(`/api/comment/`, {
@@ -115,17 +115,17 @@ const submitCommentEdit = async () => {
 
 
 const addCommentButtonEventListeners = () => {
-  console.log(`addCommentButtonEventListeners FIRED`)
+  // console.log(`addCommentButtonEventListeners FIRED`)
   const commentSubmitButtons = document.getElementsByClassName(`submit-comment`);
 
   for (let i = 0; i < commentSubmitButtons.length; i++) {
     commentSubmitButtons[i].addEventListener(`click`, handleCommentSubmit);
   }
-  console.log(`Event listeners added to comment submit buttons.`)
+  // console.log(`Event listeners added to comment submit buttons.`)
 };
 
 const addEditCommentButtonEventListeners = () => {
-  console.log(`addEditCommentButtonEventListeners FIRED`);
+  // console.log(`addEditCommentButtonEventListeners FIRED`);
   const editCommentButtons = document.getElementsByClassName(`edit`);
   for (let i = 0; i < editCommentButtons.length; i++) {
     editCommentButtons[i].addEventListener(`click`, populateCommentEditModal);
@@ -133,12 +133,12 @@ const addEditCommentButtonEventListeners = () => {
 }
 
 const addSubmitCommentEditButtonEventListener = () => {
-  console.log(`addSubmitCommentEditButtonEventListeners FIRED`)
+  // console.log(`addSubmitCommentEditButtonEventListeners FIRED`)
   const submitCommentEditButton = document.getElementById(`submit_comment_edit`);
 
   submitCommentEditButton.addEventListener(`click`, submitCommentEdit)
 
-  console.log(`Event listeners added to comment edit buttons.`)
+  // console.log(`Event listeners added to comment edit buttons.`)
 };
 
 
@@ -146,8 +146,8 @@ const addSubmitCommentEditButtonEventListener = () => {
 let selectedComment;
 
 const submitCommentDelete = async () => {
-  console.log(`submitCommentDelete FIRED`);
-  console.log(`SELECTED COMMENT ID IS ${selectedComment}`);
+  // console.log(`submitCommentDelete FIRED`);
+  // console.log(`SELECTED COMMENT ID IS ${selectedComment}`);
 
   try {
     let response = await fetch(`/api/comment/`, {
@@ -174,18 +174,18 @@ const submitCommentDelete = async () => {
 };
 
 const updateSelectedComment = (e) => {
-  console.log(`updateSelectedComment FIRED`);
+  // console.log(`updateSelectedComment FIRED`);
   selectedComment = e.target.id;
 }
 
 const addDeleteCommentButtonEventListeners = () => {
-  console.log(`addSubmitCommentDeleteButtonEventListeners FIRED`)
+  // console.log(`addSubmitCommentDeleteButtonEventListeners FIRED`)
   const commentDeleteButtons = document.getElementsByClassName(`delete`);
 
   for (let i = 0; i < commentDeleteButtons.length; i++) {
     commentDeleteButtons[i].addEventListener(`click`, updateSelectedComment);
   }
-  console.log(`Event listeners added to comment delete buttons.`)
+  // console.log(`Event listeners added to comment delete buttons.`)
 };
 
 const addSubmitDeleteCommentButtonEventListener = (e) => {

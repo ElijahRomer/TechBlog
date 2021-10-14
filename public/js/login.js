@@ -7,7 +7,7 @@ const handleFormSubmit = async (e) => {
 
   let loginData = { user_name, password }
 
-  console.log(loginData)
+  // console.log(loginData)
 
   const response = await fetch(`/api/user/login`, {
     method: "POST",
@@ -37,8 +37,8 @@ const handleFormSubmit = async (e) => {
     await timeout(hideErrorMsg, 7000)
   };
 
-  if (!response.ok) {
-    console.log(`!rawResponse.ok check worked.`)
+  if (response.status >= 400) {
+    // console.log(`!rawResponse.ok check worked.`)
     revealErrorMsg(invalidMsgEl);
   } else {
     document.location.replace('/dashboard');

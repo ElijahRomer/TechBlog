@@ -26,7 +26,7 @@ const revealErrorMsg = async (invalidMsgEl, message) => {
 
 const handlePostSubmit = async (e) => {
   e.preventDefault();
-  console.log(`handlePostSubmit FIRED`);
+  // console.log(`handlePostSubmit FIRED`);
   let post_title = document.querySelector(`#post_title`).value.trim();
   let post_body = document.querySelector(`#post_body`).value.trim();
 
@@ -55,11 +55,11 @@ const handlePostSubmit = async (e) => {
 };
 
 const openBlogPostEditor = async (e) => {
-  console.log(`editBlogPost FIRED`);
+  // console.log(`editBlogPost FIRED`);
 
   let postId = e.target.id;
   let post_titleEl = document.getElementById(`title${postId}`).firstChild.nextSibling;
-  console.log(post_titleEl)
+  // console.log(post_titleEl)
   let post_bodyEl = document.querySelector(`#body${postId}`);
 
 
@@ -75,15 +75,15 @@ const openBlogPostEditor = async (e) => {
   post_title_editor.value = post_title.slice(1, -1);
   post_body_editor.textContent = post_body;
 
-  console.log(postId);
-  console.log(post_title);
-  console.log(post_body);
+  // console.log(postId);
+  // console.log(post_title);
+  // console.log(post_body);
 
 };
 
 const submitBlogPostEdit = async (e) => {
   e.preventDefault();
-  console.log(`submitBlogPostEdit FIRED`);
+  // console.log(`submitBlogPostEdit FIRED`);
   let post_id = document.querySelector(`#post_id_reference`).value;
   let post_title = document.querySelector(`#post_title_edit`).value;
   let post_body = document.querySelector(`#post_body_edit`).value;
@@ -94,7 +94,7 @@ const submitBlogPostEdit = async (e) => {
     post_body,
   };
 
-  console.log(updateData);
+  // console.log(updateData);
 
   try {
     const response = await fetch(`api/post/update`, {
@@ -105,8 +105,8 @@ const submitBlogPostEdit = async (e) => {
       body: JSON.stringify(updateData)
     });
 
-    console.log(response);
-    console.log(response.status);
+    // console.log(response);
+    // console.log(response.status);
     document.location.reload()
   } catch (error) {
     console.log(err);
@@ -115,13 +115,13 @@ const submitBlogPostEdit = async (e) => {
 };
 
 const updateSelectedPost = (e) => {
-  console.log(`setUpDeleteBlogPostModal FIRED`);
+  // console.log(`setUpDeleteBlogPostModal FIRED`);
   e.preventDefault();
   selectedPost = e.target.id;
 }
 
 const deleteBlogPost = async (e) => {
-  console.log(`deleteBlogPost FIRED`);
+  // console.log(`deleteBlogPost FIRED`);
   let postId = selectedPost;
   console.log(postId);
 
@@ -146,7 +146,7 @@ const deleteBlogPost = async (e) => {
 };
 
 const addBlogPostEditButtonEventListeners = async () => {
-  console.log(`addBlogPostEditButtonEventListeners FIRED`);
+  // console.log(`addBlogPostEditButtonEventListeners FIRED`);
 
   const editButtons = document.getElementsByClassName(`edit`);
   for (let i = 0; i < editButtons.length; i++) {
@@ -155,7 +155,7 @@ const addBlogPostEditButtonEventListeners = async () => {
 };
 
 const addBlogPostDeleteButtonEventListeners = async () => {
-  console.log(`addBlogPostDeleteButtonEventListeners FIRED`);
+  // console.log(`addBlogPostDeleteButtonEventListeners FIRED`);
 
   const deleteButtons = document.getElementsByClassName(`delete`);
   for (let i = 0; i < deleteButtons.length; i++) {
