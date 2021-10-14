@@ -35,12 +35,6 @@ const appendCommentToPage = (newComment) => {
         <small class="text-muted">On ${format_date_time(newComment.createdAt)}, you said:
         </small>
         <p>${newComment.comment_body}</p>
-        <div class="d-flex justify-content-center" id="postManageBtns">
-          <button class="btn btn-warning col-3 mx-2 my-1 edit" id="${newComment.id}" type="button"
-            data-bs-toggle="modal" data-bs-target="#editPostModal">Edit</button>
-          <button class="btn btn-danger col-3 mx-2 my-1 delete" id="${newComment.id}" data-bs-toggle="modal"
-          data-bs-target="#confirmPostDeleteModal">Delete</button>
-        </div>
       </div>
     </div>
   </div>
